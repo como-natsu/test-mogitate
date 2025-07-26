@@ -7,9 +7,8 @@
 @section('content')
 <div class="product-edit">
     <form class="edit-form" action="/products/{{ $product->id }}/update" method="POST" enctype="multipart/form-data">
+        @method('PATCH')
         @csrf
-        @method('PUT')
-        <div></div>
         <div class="breadcrumb">
             <a href="{{ url('/products') }}">商品一覧</a> &gt; {{$product->name}}
         </div>
@@ -109,11 +108,19 @@
 
             <div class="form-button">
                 <a href="/products" class="form-button-revise">戻る</a>
-                <button class="form-button-sumbit" type="submit">登録</button>
+                <button class="form-button-sumbit" type="submit">変更を保存</button>
             </div>
-
-
     </form>
+    <div class="delete-form">
+        <form action="/products/{{ $product->id }}/delete" method="POST">
+            @method('DELETE')
+            @csrf
+            <div class="delete-form__button">
+                <input type="hidden" name="id" value="{{ $product['id'] }}">
+                <button class="delete-form-button-submit" type="submit">削除</button>
+            </div>
+        </form>
+    </div>
 
 </div>
 

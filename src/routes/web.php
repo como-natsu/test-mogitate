@@ -21,6 +21,7 @@ Route::post('/products/register',[ProductController::class,'store']);
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
 Route::get('/products/{productId}', [ProductController::class,'edit']);
-
+Route::patch('/products/{productId}/update', [ProductController::class,'update']);
+Route::delete('/products/{productId}/delete', [ProductController::class, 'destroy']);
 
 

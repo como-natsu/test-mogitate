@@ -70,66 +70,46 @@
                 $selectedSeasonIds = old('season_id', []);
                 @endphp
                 <div class="form__season-inputs">
+                    @foreach ($seasons as $season)
                     <div class="form__season-option">
                         <label class="form__season-label">
-                            <input class="form__season-input" name="season_id" type="radio" value="1"
-                                {{ old('season_id') == 1 ? 'checked' : '' }}>
-                            <span class="form__season-text">春</span>
+                            <input class="form__season-input" name="season_id[]" type="checkbox"
+                                value="{{ $season->id }}"
+                                {{ in_array($season->id, $selectedSeasonIds) ? 'checked' : '' }}>
+                            <span class="form__season-text">{{ $season->name }}</span>
                         </label>
                     </div>
-
-                    <div class="form__season-option">
-                        <label class="form__season-label">
-                            <input class="form__season-input" name="season_id" type="radio" value="2"
-                                {{ old('season_id') == 2 ? 'checked' : '' }}>
-                            <span class="form__season-text">夏</span>
-                        </label>
-                    </div>
-
-                    <div class="form__season-option">
-                        <label class="form__season-label">
-                            <input class="form__season-input" name="season_id" type="radio" value="3"
-                                {{ old('season_id') == 3 ? 'checked' : '' }}>
-                            <span class="form__season-text">秋</span>
-                        </label>
-                    </div>
-
-                    <div class="form__season-option">
-                        <label class="form__season-label">
-                            <input class="form__season-input" name="season_id" type="radio" value="4"
-                                {{ old('season_id') == 4 ? 'checked' : '' }}>
-                            <span class="form__season-text">冬</span>
-                        </label>
-                    </div>
-                </div>
-                <p class="form__error-message">
-                    @error('season_id')
-                    {{ $message }}
-                    @enderror
-                </p>
-
-                <div class="form-group">
-                    <div class="form-group-title">
-                        <span class="form-label">商品説明</span>
-                        <span class="form-label-required">必須</span>
-                    </div>
-                    <div class="form-group-content">
-                        <textarea class="form__textarea" name="description" id="" cols="30" rows="10"
-                            placeholder="商品の説明を入力">{{ old('description') }}</textarea>
-                        <p class="form__error-message">
-                            @error('description')
-                            {{ $message }}
-                            @enderror
-                        </p>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
+            <p class="form__error-message">
+                @error('season_id')
+                {{ $message }}
+                @enderror
+            </p>
 
-            <div class="form-button">
-                <a href="/products" class="form-button-revise">戻る</a>
-                <button class="form-button-sumbit" type="submit">登録</button>
+            <div class="form-group">
+                <div class="form-group-title">
+                    <span class="form-label">商品説明</span>
+                    <span class="form-label-required">必須</span>
+                </div>
+                <div class="form-group-content">
+                    <textarea class="form__textarea" name="description" id="" cols="30" rows="10"
+                        placeholder="商品の説明を入力">{{ old('description') }}</textarea>
+                    <p class="form__error-message">
+                        @error('description')
+                        {{ $message }}
+                        @enderror
+                    </p>
+                </div>
+
             </div>
+        </div>
+
+        <div class="form-button">
+            <a href="/products" class="form-button-revise">戻る</a>
+            <button class="form-button-sumbit" type="submit">登録</button>
+        </div>
     </form>
 </div>
 @endsection

@@ -13,6 +13,11 @@
             {{ session('success') }}
         </div>
         @endif
+        @if (session('message'))
+        <div class="alert-message">
+            {{ session('message') }}
+        </div>
+        @endif
     </div>
 
     <h2 class="products-heading">

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Product;
+
 
 class UpdateProductRequest extends FormRequest
 {
@@ -26,11 +28,23 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => ['required','string'],
             'price' => ['required','integer', 'between:0,10000'],
-            'image' => ['required','image','mimes:jpeg,png'],
+            'image' => ['nullable','image','mimes:jpeg,png'],
             'season_id' => ['required'],
             'description' => ['required','string','max:120'],
         ];
     }
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $productId = $this->route('productId');
+            $product = Product::find($productId);
+
+            if (!$this->hasFile('image') && empty($product->image)) {
+                $validator->errors()->add('image', '商品画像を登録してください');
+            }
+        });
+    }
+
 
     public function messages()
     {
@@ -46,7 +60,6 @@ class UpdateProductRequest extends FormRequest
             'description.max' => '120文字以内で入力してください',
             'image.required' => '商品画像を登録してください',
             'image.image' => '「.png」または「.jpeg」形式でアップロードしてください',
-            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
         ];
     }
 }

@@ -18,7 +18,8 @@ class ProductController extends Controller
 
     public function register()
     {
-        return view ('register');
+        $seasons = Season::all();
+        return view('register', compact('seasons'));
     }
 
     public function store(StoreProductRequest $request)
@@ -65,5 +66,35 @@ class ProductController extends Controller
         $product = Product::with('seasons')->find($productId);
         $seasons =Season::all();
         return view('edit', compact('product', 'seasons'));
+    }
+
+
+    public function update(UpdateProductRequest $request,$productId)
+    {
+    $product = Product::findOrFail($productId);
+
+    $updateData = [
+        'name' => $request->name,
+        'price' => $request->price,
+        'description' => $request->description,
+    ];
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+        $updateData['image'] = 'storage/' . $imagePath;
+    }
+
+    $product->update($updateData);
+
+    $product->seasons()->sync($request->input('season_id'));
+
+    return redirect('/products')->with('message', '変更を保存しました');
+    }
+
+
+    public function destroy($productId)
+    {
+        Product::find($productId)->delete();
+        return redirect('/products/{productId}');
     }
 }
