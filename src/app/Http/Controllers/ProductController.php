@@ -63,38 +63,47 @@ class ProductController extends Controller
 
     public function edit(Request $request, $productId)
     {
-        $product = Product::with('seasons')->find($productId);
-        $seasons =Season::all();
+        $product = Product::withTrashed()->with('seasons')->find($productId);
+        $seasons = Season::all();
+
+        if ($product && $product->trashed()) {
+        $product = null;
+        }
+
         return view('edit', compact('product', 'seasons'));
     }
 
-
     public function update(UpdateProductRequest $request,$productId)
     {
-    $product = Product::findOrFail($productId);
+        $product = Product::findOrFail($productId);
 
-    $updateData = [
+        $updateData = [
         'name' => $request->name,
         'price' => $request->price,
         'description' => $request->description,
     ];
 
-    if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
         $imagePath = $request->file('image')->store('images', 'public');
         $updateData['image'] = 'storage/' . $imagePath;
     }
 
-    $product->update($updateData);
+        $product->update($updateData);
 
-    $product->seasons()->sync($request->input('season_id'));
+        $product->seasons()->sync($request->input('season_id'));
 
-    return redirect('/products')->with('message', '変更を保存しました');
+        return redirect('/products')->with('message', '変更を保存しました');
     }
 
 
     public function destroy($productId)
     {
-        Product::find($productId)->delete();
-        return redirect('/products/{productId}');
+        $product = Product::find($productId);
+        if ($product) {
+        $product->delete();
+        }
+
+        return view('edit', ['product' => null, 'seasons' => Season::all()]);
     }
+
 }
