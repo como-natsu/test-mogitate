@@ -1,0 +1,34 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    padding: 0;
+}
+
+.pagination__link,
+.pagination__active,
+.pagination__ellipsis {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.pagination__link:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination__active {
+    background-color: #8B7969;
+    color: white;
+    border-color: #8B7969;
+}

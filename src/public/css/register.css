@@ -1,0 +1,10 @@
+.form__season-inputs {
+    display: flex;
+    gap: 16px;
+}
+
+.form__season-option {
+    display: flex;
+    align-items: center;
+}
+
