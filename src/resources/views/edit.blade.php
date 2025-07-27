@@ -6,16 +6,14 @@
 
 @section('content')
 <div class="product-edit">
+    <form action="{{ $product ? route('products.update', ['productId' => $product->id]) : url('/products') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     @if ($product)
-        <form action="/products/{{ $product->id }}/update" method="POST" enctype="multipart/form-data">
-            @method('PATCH')
-            @csrf
-    @else
-        <form action="/products" method="POST" enctype="multipart/form-data">
-            @csrf
+        @method('PATCH')
     @endif
             <div class="breadcrumb">
-                <a href="{{ url('/products') }}">商品一覧</a> &gt; @if ($product)
+                <a href="{{ url('/products') }}">商品一覧</a> &gt;
+                @if ($product)
                     {{ $product->name }}
                 @else
                     新規登録
