@@ -12,3 +12,120 @@
 .breadcrumb a:hover {
     text-decoration: underline;
 }
+
+.product-edit {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.product-edit>form>.form-group:first-child .form-group-content {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.current-image {
+    flex-shrink: 0;
+    width: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.current-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.product-info-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+.product-info-group .form-group {
+    margin-bottom: 0;
+}
+
+
+.form__season-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+
+.product-description-group {
+    margin-top: 32px;
+}
+
+
+.form__textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.4;
+    border: 1px solid #E0DFDE;
+    border-radius: 5px;
+    padding: 11px 12px;
+    font-family: inherit;
+    outline-offset: 2px;
+    transition: border-color 0.3s ease;
+}
+
+
+.form-button {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.form-button-revise,
+.form-button-sumbit {
+    min-width: 140px;
+    padding: 10px 32px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.form-button-revise {
+    background-color: #eee;
+    color: #666;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-button-revise:hover {
+    background-color: #ddd;
+}
+
+.form-button-sumbit {
+    background-color: #F5C800;
+    color: #333;
+}
+
+.form-button-sumbit:hover {
+    background-color: #ddb700;
+}
