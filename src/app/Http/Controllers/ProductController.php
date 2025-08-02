@@ -103,7 +103,8 @@ class ProductController extends Controller
         $product->delete();
         }
 
-        return view('edit', ['product' => null, 'seasons' => Season::all()]);
+        //return view('edit', ['product' => null, 'seasons' => Season::all()]);
+        return redirect('/products')->with('message', '削除しました');
     }
 
 }

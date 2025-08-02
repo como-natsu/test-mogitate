@@ -64,14 +64,14 @@
 
 
 .header__logo {
-    width: 112px;
+    width: 10rem;
     height: 33px;
 
-    font-family: 'jsMath-cmti10';
+    font-family: 'jsMath-cmti10',serlf;
     font-style: italic;
     font-weight: 500;
     font-size: 30px;
     line-height: 33px;
-
+    text-decoration: none;
     color: #F5C800;
 }
