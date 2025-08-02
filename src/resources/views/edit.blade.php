@@ -20,90 +20,90 @@
             新規登録
             @endif
         </div>
-<div class="form-group-wrapper">
-        <div class="form-group-wrapper-left">
-            <div class="form-group">
-                <div class="form-group-content">
-                    <div class="form-input">
-                        @if (!empty($product) && !empty($product->image))
-                        <div class="current-image">
-                            <img src="{{ asset($product->image) }}" alt="登録済み画像" width="200">
+        <div class="form-group-wrapper">
+            <div class="form-group-wrapper-left">
+                <div class="form-group">
+                    <div class="form-group-content">
+                        <div class="form-input">
+                            @if (!empty($product) && !empty($product->image))
+                            <div class="current-image">
+                                <img src="{{ asset($product->image) }}" alt="登録済み画像" width="200">
+                            </div>
+                            @endif
+                            <input type="file" name="image">
                         </div>
-                        @endif
-                        <input type="file" name="image">
+                        <p class="form__error-message">
+                            @error('image')
+                            {{ $message }}
+                            @enderror
+                        </p>
                     </div>
-                    <p class="form__error-message">
-                        @error('image')
-                        {{ $message }}
-                        @enderror
-                    </p>
+                </div>
+            </div>
+
+            <div class="form-group-wrapper-right">
+                <div class="form-group">
+                    <div class="form-group-title">
+                        <span class="form-label">商品名</span>
+                    </div>
+                    <div class="form-group-content">
+                        <div class="form-input">
+                            <input type="text" name="name" value="{{ old('name',  optional($product)->name) }}">
+                        </div>
+                        <p class="form__error-message">
+                            @error('name')
+                            {{ $message }}
+                            @enderror
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-title">
+                        <span class="form-label">値段</span>
+                    </div>
+                    <div class="form-group-content">
+                        <div class="form-input">
+                            <input type="text" name="price" value="{{ old('price', optional($product)->price) }}" />
+                        </div>
+                        <p class="form__error-message">
+                            @error('price')
+                            {{ $message }}
+                            @enderror
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group-title">
+                        <span class="form-label">季節</span>
+                    </div>
+                    <div class="form-group-content">
+                        @php
+                        $selectedSeasonIds = optional($product)->seasons ? $product->seasons->pluck('id')->toArray() :
+                        [];
+                        @endphp
+                        <div class="form__season-inputs">
+                            @foreach ($seasons as $season)
+                            <div class="form__season-option">
+                                <label class="form__season-label">
+                                    <input class="form__season-input" name="season_id[]" type="checkbox"
+                                        value="{{ $season->id }}"
+                                        {{ in_array($season->id, old('season_id', $selectedSeasonIds)) ? 'checked' : '' }}>
+                                    <span class="form__season-text">{{ $season->name }}</span>
+                                </label>
+                            </div>
+                            @endforeach
+                        </div>
+                        <p class="form__error-message">
+                            @error('season_id')
+                            {{ $message }}
+                            @enderror
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="form-group-wrapper-right">
-            <div class="form-group">
-                <div class="form-group-title">
-                    <span class="form-label">商品名</span>
-                </div>
-                <div class="form-group-content">
-                    <div class="form-input">
-                        <input type="text" name="name" value="{{ old('name',  optional($product)->name) }}">
-                    </div>
-                    <p class="form__error-message">
-                        @error('name')
-                        {{ $message }}
-                        @enderror
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="form-group-title">
-                    <span class="form-la
-                bel">値段</span>
-                </div>
-                <div class="form-group-content">
-                    <div class="form-input">
-                        <input type="text" name="price" value="{{ old('price', optional($product)->price) }}" />
-                    </div>
-                    <p class="form__error-message">
-                        @error('price')
-                        {{ $message }}
-                        @enderror
-                    </p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="form-group-title">
-                    <span class="form-label">季節</span>
-                </div>
-                <div class="form-group-content">
-                    @php
-                    $selectedSeasonIds = optional($product)->seasons ? $product->seasons->pluck('id')->toArray() : [];
-                    @endphp
-                    <div class="form__season-inputs">
-                        @foreach ($seasons as $season)
-                        <div class="form__season-option">
-                            <label class="form__season-label">
-                                <input class="form__season-input" name="season_id[]" type="checkbox"
-                                    value="{{ $season->id }}"
-                                    {{ in_array($season->id, old('season_id', $selectedSeasonIds)) ? 'checked' : '' }}>
-                                <span class="form__season-text">{{ $season->name }}</span>
-                            </label>
-                        </div>
-                        @endforeach
-                    </div>
-                    <p class="form__error-message">
-                        @error('season_id')
-                        {{ $message }}
-                        @enderror
-                    </p>
-                </div>
-            </div>
-        </div>
-</div>
 
         <div class="form-group">
             <div class="form-group-title">
